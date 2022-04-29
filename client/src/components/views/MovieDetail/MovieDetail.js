@@ -28,10 +28,15 @@ function MovieDetail(props) {
 
         let Trailerinfo = `${API_URL}movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`;
         const res = await axios.get(Trailerinfo);
+        const len= res.data.results.length;
         setTrailer(res.data.results[0].key);
+        for(var i=0;i<len;i++)
+        {
+            if(res.data.results[i].type == 'Trailer')
+            setTrailer(res.data.results[i].key);
+        }
 
-
-
+        
         let endpointForMovieInfo = `${API_URL}movie/${movieId}?api_key=${API_KEY}&language=en-US`;
         
         fetchDetailInfo(endpointForMovieInfo)
