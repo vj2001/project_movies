@@ -6,9 +6,12 @@ import { USER_SERVER } from '../../../Config';
 import { withRouter } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
+
 function RightMenu(props) {
   const user = useSelector(state => state.user)
-
+  // console.log(user)
+  // let name = User.find({'_id':localStorage.getItem('userId')})
+  // console.log(name)
   const logoutHandler = () => {
     axios.get(`${USER_SERVER}/logout`).then(response => {
       if (response.status === 200) {
@@ -18,8 +21,9 @@ function RightMenu(props) {
       }
     });
   };
-
+  
   if (user.userData && !user.userData.isAuth) {
+    
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="mail">
@@ -31,10 +35,13 @@ function RightMenu(props) {
       </Menu>
     )
   } else {
+    if (user.userData && user.userData.name)
+    var name = user.userData.name
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="user">
-         <h3>Welcome {localStorage.getItem('userId')}</h3>
+          
+         <h3>Welcome {name}</h3>
         </Menu.Item>
 
         <Menu.Item key="logout">
