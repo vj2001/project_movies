@@ -6,6 +6,7 @@ import GridCards from '../commons/GridCards';
 import MainImage from '../../views/LandingPage/Sections/MainImage';
 import Favorite from './sections/Favorite';
 import Comments from './sections/Comments';
+import MovieData from './sections/MovieData';
 import Youtube from 'react-youtube';
 
 function MovieDetail(props) {
@@ -118,7 +119,6 @@ function MovieDetail(props) {
                 <div>loading...</div>
             }
 
-
             {/* Body */}
             <div style={{ width: '85%', margin: '1rem auto' }}>
 
@@ -126,17 +126,24 @@ function MovieDetail(props) {
                     <Favorite movieInfo={Movie} movieId={movieId} userFrom={localStorage.getItem('userId')} />
                 </div>
 
+                <br/><br/>
+                 {/* Movie Info */}
+             {!LoadingForMovie ?
+                    <MovieData movie={Movie} />
+                    :
+                    <div>LOADING !! Please wait..</div>
+                }
 
 
                 <br />
                 {/* Actors Grid*/}
 
                 <div style={{ display: 'flex', justifyContent: 'center', margin: '2rem' }}>
-                    <Button onClick={toggleActorView}>Toggle Actor Names </Button>
+                    <Button style={{color:'purple'}} onClick={toggleActorView}>Toggle Actor Names </Button>
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'center', margin: '2rem' }}>
-                    <Button onClick={watchTrailer}>Watch Trailer</Button>
+                    <Button style={{color:'purple'}} onClick={watchTrailer}>Watch Trailer</Button>
                 </div>
 
                 
@@ -149,15 +156,17 @@ function MovieDetail(props) {
 
                 {ActorToggle &&
                     <Row gutter={[16, 16]}>
-                        {
-                            !LoadingForCasts ? Casts.map((cast, index) => (
-                                cast.profile_path &&
-                                <GridCards
-                                    characterName={cast.name}
-                                />)) :
-                                <div>loading...</div>
-                        }
-                    </Row>
+                    {
+                        !LoadingForCasts ? Casts.map((cast, index) => (
+                            cast.profile_path &&
+                            <GridCards
+                                image={cast.profile_path ?
+                                    `${IMAGE_BASE_URL}w500${cast.profile_path}` : null}
+                                         characterName={cast.name}
+                            />)) :
+                            <div>loading...</div>
+                    }
+                </Row>
                 }
                 <br />
                 <Comments movieTitle={Movie.original_title} CommentLists={CommentLists} postId={movieId} refreshFunction={updateComment} />

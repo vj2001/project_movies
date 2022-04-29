@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
-import { Button } from 'antd';
+import { Button} from 'antd';
 
 function Favorite(props) {
 
@@ -82,8 +82,9 @@ function Favorite(props) {
 
     return (
         <div>
-            <Button onClick={onClickFavorite}>{Favorited ? " Not Favorite" : "Add to Favorites "}  {FavoriteNumber}  </Button>
-
+            <Button style={{color:'white',backgroundColor:'black'}} onClick={onClickFavorite}>{Favorited ? " Not Favorite" : "Add to Favorites "}</Button>
+            <br/>
+             <p style={{color:"red"}}>{FavoriteNumber} users have added this movie to Favorites</p>
         </div>
     )
 }

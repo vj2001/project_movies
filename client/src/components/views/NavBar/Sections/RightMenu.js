@@ -34,13 +34,10 @@ function RightMenu(props) {
       </Menu>
     )
   } else {
-    if (user.userData && user.userData.name)
-    var name = user.userData.name
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="user">
-          
-         <h3>Welcome {name}</h3>
+        {user.userData && <h3>Welcome {user.userData.name}</h3>}
         </Menu.Item>
 
         <Menu.Item key="logout">
