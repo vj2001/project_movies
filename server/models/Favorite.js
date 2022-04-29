@@ -9,6 +9,7 @@ const favoriteSchema = mongoose.Schema({
     movieId: String,
     movieTitle: String,
     moviePost: String,
+    key:String
 })
 
 const Favorite = mongoose.model('Favorite',favoriteSchema)

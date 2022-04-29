@@ -2,35 +2,33 @@ const express = require('express');
 const router = express.Router();
 const { Favorite } = require('../models/Favorite');
 
-router.post('/favoriteNumber', (req, res) => {
+router.post('/favoriteNumber', async (req, res) => {
 
-    //mongoDB에서   favorite 숫자를 가져오기 
-    Favorite.find({ "movieId": req.body.movieId })
-        .exec((err, info) => {
-            if (err) return res.status(400).send(err)
-            // 그다음에   프론트에  다시   숫자 정보를 보내주기  
-            res.status(200).json({ success: true, favoriteNumber: info.length })
-        })
+        try{
+            let info = await  Favorite.find({ "movieId": req.body.movieId })
+            return res.status(200).json({ success: true, favoriteNumber: info.length })
+        }catch(error){
+            
+            return res.status(400).send(err)
+        }
 
 })
 
 
 
-router.post('/favorited', (req, res) => {
+router.post('/favorited', async (req, res) => {
 
-    // 내가 이 영화를  Favorite 리스트에 넣었는지   정보를  DB 에서 가져오기 
-    Favorite.find({ "movieId": req.body.movieId, "userFrom": req.body.userFrom })
-        .exec((err, info) => {
-            if (err) return res.status(400).send(err)
-            // 그다음에   프론트에  다시   숫자 정보를 보내주기  
-
+         try{
+            let info = await Favorite.find({ "movieId": req.body.movieId, "key": req.body.userFrom })
             let result = false;
             if (info.length !== 0) {
                 result = true
             }
 
             res.status(200).json({ success: true, favorited: result })
-        })
+        }catch(err){
+            return res.status(400).send(err)
+        }
 })
 
 
@@ -40,50 +38,66 @@ router.post('/favorited', (req, res) => {
 
 
 
-router.post('/removeFromFavorite', (req, res) => {
+router.post('/removeFromFavorite', async(req, res) => {
 
-    Favorite.findOneAndDelete({ movieId: req.body.movieId, userFrom: req.body.userFrom })
-        .exec((err, doc) => {
-            if (err) return res.status(400).send(err)
-            res.status(200).json({ success: true, doc })
-        })
+        try{
+            await Favorite.findOneAndDelete({ movieId: req.body.movieId, key: req.body.userFrom });
+            return res.status(200).json({ success: true })
+        }catch(error){
+            return res.status(400).send(err)
+        }
 
 })
 
 
 
 
-router.post('/addToFavorite', (req, res) => {
+router.post('/addToFavorite', async (req, res) => {
 
-    const favorite = new Favorite(req.body)
-
-    favorite.save((err, doc) => {
-        if (err) return res.status(400).send(err)
+    userFrom = req.body.userFrom;
+    movieId = req.body.movieId;
+    movieTitle = req.body.movieTitle;
+    moviePost = req.body.moviePost;
+    key = req.body.userFrom;
+    const favorite = new Favorite({userFrom,movieId,movieTitle,moviePost,key});
+    try{
+        await favorite.save();
         return res.status(200).json({ success: true })
-    })
+    }catch(err){
+        return res.status(400).send(err)
+    }
 
 })
 
 
 
 
-router.post('/getFavoredMovie', (req, res) => {
+router.post('/getFavoredMovie', async (req, res) => {
 
-    Favorite.find({ 'userFrom': req.body.userFrom })
+    Favorite.find({ 'key': req.body.userFrom })
         .exec((err, favorites) => {
             if (err) return res.status(400).send(err)
             return res.status(200).json({ success: true, favorites })
         })
 
+        // try{
+        //     let favourites = await Favourite.find({ 'userFrom': req.body.userFrom });
+        //     return res.status(200).json({ success: true, favourites })
+        // }catch(error){
+        //     return res.status(400).send(error)
+        // }
+
 })
 
-router.post('/removeFromFavorite', (req, res) => {
+router.post('/removeFromFavorite',async (req, res) => {
 
-    Favorite.findOneAndDelete({ movieId: req.body.movieId, userFrom: req.body.userFrom })
-        .exec((err, result) => {
-            if (err) return res.status(400).send(err)
+  
+        try{
+            await Favorite.findOneAndDelete({ movieId: req.body.movieId, key: req.body.userFrom });
             return res.status(200).json({ success: true })
-        })
+        }catch(error){
+            return res.status(400).send(err)
+        }
 
 })
 
