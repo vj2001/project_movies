@@ -11,6 +11,6 @@ const favoriteSchema = mongoose.Schema({
     moviePost: String,
 })
 
-const Favourite = mongoose.model('Favourite',favoriteSchema)
+const Favorite = mongoose.model('Favorite',favoriteSchema)
 
-module.exports = {Favourite}
+module.exports = {Favorite}
