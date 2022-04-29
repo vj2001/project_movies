@@ -32,7 +32,7 @@ function FavoritePage() {
 
         const variables = {
             movieId,
-            userFrom
+            userFrom: localStorage.getItem('userId') 
         }
 
         Axios.post('/api/favorite/removeFromFavorite', variables)
@@ -43,7 +43,7 @@ function FavoritePage() {
                     alert("ERROR")
                 }
             })
-
+     console.log(userFrom)
 
     }
 
@@ -64,10 +64,12 @@ function FavoritePage() {
         return  <tr key={index}>
 
                 <td>{favorite.movieTitle}</td>
-            
+                
+                <td><button onClick={() => onClickDelete(favorite.movieId, favorite.userFrom)}>Remove</button></td>
+                
+
 
             {/* <td>{favorite.movieRunTime} mins</td> */}
-            <td><button onClick={() => onClickDelete(favorite.movieId, favorite.userFrom)}>Remove</button></td>
 
         </tr>
     })
