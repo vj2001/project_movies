@@ -32,12 +32,6 @@ router.post('/favorited', async (req, res) => {
 })
 
 
-
-
-
-
-
-
 router.post('/removeFromFavorite', async(req, res) => {
 
         try{
@@ -74,18 +68,12 @@ router.post('/addToFavorite', async (req, res) => {
 
 router.post('/getFavoredMovie', async (req, res) => {
 
-    Favorite.find({ 'key': req.body.userFrom })
-        .exec((err, favorites) => {
-            if (err) return res.status(400).send(err)
+        try{
+            let favorites = await Favorite.find({ "key": req.body.userFrom });
             return res.status(200).json({ success: true, favorites })
-        })
-
-        // try{
-        //     let favourites = await Favourite.find({ 'userFrom': req.body.userFrom });
-        //     return res.status(200).json({ success: true, favourites })
-        // }catch(error){
-        //     return res.status(400).send(error)
-        // }
+        }catch(error){
+            return res.status(400).send(error)
+        }
 
 })
 
