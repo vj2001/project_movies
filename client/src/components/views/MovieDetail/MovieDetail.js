@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { List, Avatar, Row, Col, Button } from 'antd';
-import axios from 'axios';
+import { Row, Button } from 'antd';
 
 import { API_URL, API_KEY, IMAGE_BASE_URL, IMAGE_SIZE } from '../../Config'
 import GridCards from '../commons/GridCards';
@@ -14,9 +13,6 @@ function MovieDetail(props) {
     const [LoadingForMovie, setLoadingForMovie] = useState(true)
     const [LoadingForCasts, setLoadingForCasts] = useState(true)
     const [ActorToggle, setActorToggle] = useState(false)
-    const movieVariable = {
-        movieId: movieId
-    }
 
     useEffect(() => {
 

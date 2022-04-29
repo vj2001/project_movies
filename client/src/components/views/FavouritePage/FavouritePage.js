@@ -68,7 +68,7 @@ function FavoritePage() {
             </Popover>
             
 
-            <td>{favorite.movieRunTime} mins</td>
+            {/* <td>{favorite.movieRunTime} mins</td> */}
             <td><button onClick={() => onClickDelete(favorite.movieId, favorite.userFrom)}>Remove</button></td>
 
         </tr>
@@ -85,7 +85,7 @@ function FavoritePage() {
                 <thead>
                     <tr>
                         <th>Movie Title</th>
-                        <th>Movie RunTime</th>
+                        {/* <th>Movie RunTime</th> */}
                         <td>Remove from favorites</td>
                     </tr>
                 </thead>
