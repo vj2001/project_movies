@@ -56,7 +56,7 @@ router.post("/login", async(req, res) => {
                         .cookie("w_auth", user.token)
                         .status(200)
                         .json({
-                            loginSuccess: true, userId: user._id
+                            loginSuccess: true, userId: user._id,userName:user.name
                         });
                 });
             });
@@ -76,7 +76,7 @@ router.get("/logout", auth, async (req, res) => {
         return res.status(200).send({
             success: true
         });
-     }catch(err){
+    }catch(err){
         return res.json({ success: false, err });
     }
 

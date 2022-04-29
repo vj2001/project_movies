@@ -6,22 +6,34 @@ import GridCards from '../commons/GridCards';
 import MainImage from '../../views/LandingPage/Sections/MainImage';
 import Favorite from './sections/Favorite';
 import Comments from './sections/Comments';
+import Youtube from 'react-youtube';
+
 function MovieDetail(props) {
 
     const movieId = props.match.params.movieId
+    const [trailertoggler,settrailertoggler] = useState(false);
     const [Movie, setMovie] = useState([])
     const [Casts, setCasts] = useState([])
     const [CommentLists, setCommentLists] = useState([])
     const [LoadingForMovie, setLoadingForMovie] = useState(true)
     const [LoadingForCasts, setLoadingForCasts] = useState(true)
     const [ActorToggle, setActorToggle] = useState(false)
+    const [Trailer,setTrailer] = useState();
     const movieVariable = {
         movieId: movieId
     }
 
-    useEffect(() => {
+    useEffect(async() => {
+
+
+        let Trailerinfo = `${API_URL}movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`;
+        const res = await axios.get(Trailerinfo);
+        setTrailer(res.data.results[0].key);
+
+
 
         let endpointForMovieInfo = `${API_URL}movie/${movieId}?api_key=${API_KEY}&language=en-US`;
+        
         fetchDetailInfo(endpointForMovieInfo)
 
         axios.post('/api/comment/getComments', movieVariable)
@@ -68,6 +80,26 @@ function MovieDetail(props) {
         setCommentLists(CommentLists.concat(newComment))
     }
 
+
+    const opts ={
+        height:"390",
+        width:"100%",
+        playerVars:{
+            autoplay:1
+        }
+
+
+    };
+
+    useEffect(()=>{
+
+    },[Trailer]);
+
+    const watchTrailer = async()=>{
+        settrailertoggler(!trailertoggler);
+     
+    }
+
     return (
         <div>
             {/* Header */}
@@ -97,6 +129,18 @@ function MovieDetail(props) {
                 <div style={{ display: 'flex', justifyContent: 'center', margin: '2rem' }}>
                     <Button onClick={toggleActorView}>Toggle Actor Names </Button>
                 </div>
+
+                <div style={{ display: 'flex', justifyContent: 'center', margin: '2rem' }}>
+                    <Button onClick={watchTrailer}>Watch Trailer</Button>
+                </div>
+
+                
+                    {
+                        trailertoggler && <Youtube videoId={Trailer} opts={opts}/>
+                    }
+                
+
+
 
                 {ActorToggle &&
                     <Row gutter={[16, 16]}>

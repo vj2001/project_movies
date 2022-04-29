@@ -32,17 +32,6 @@ router.post('/favorited', async (req, res) => {
 })
 
 
-router.post('/removeFromFavorite', async(req, res) => {
-
-        try{
-            await Favorite.findOneAndDelete({ movieId: req.body.movieId, key: req.body.userFrom });
-            return res.status(200).json({ success: true })
-        }catch(error){
-            return res.status(400).send(err)
-        }
-
-})
-
 
 
 
@@ -77,15 +66,16 @@ router.post('/getFavoredMovie', async (req, res) => {
 
 })
 
-router.post('/removeFromFavorite',async (req, res) => {
+router.post('/removeFromFavorite', async(req, res) => {
 
-  
-        try{
-            await Favorite.findOneAndDelete({ movieId: req.body.movieId, key: req.body.userFrom });
-            return res.status(200).json({ success: true })
-        }catch(error){
-            return res.status(400).send(err)
-        }
+    console.log(req.body.movieId)
+    console.log(req.body.userFrom)
+    try{
+        await Favorite.findOneAndDelete({ movieId: req.body.movieId, key: req.body.userFrom });
+        return res.status(200).json({ success: true })
+    }catch(error){
+        return res.status(400).send(error)
+    }
 
 })
 
