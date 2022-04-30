@@ -29,7 +29,7 @@ app.use(cookieParser());
 
 app.use('/api/users', require('./routes/users'));
 app.use('/api/favorite', require('./routes/favorite'));
-
+app.use('/api/comment', require('./routes/comment'))
 
 const port = process.env.PORT || 5000
 
