@@ -6,7 +6,7 @@ import { Row } from 'antd';
 
 function LandingPage() {
 
-    const [Viseos, setVideos] = useState([])
+    
     const [Movies, setMovies] = useState([])
     const [MainMovieImage, setMainMovieImage] = useState(null)
     const [CurrentPage, setCurrentPage] = useState(0)

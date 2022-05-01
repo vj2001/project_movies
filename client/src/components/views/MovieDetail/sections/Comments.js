@@ -48,10 +48,11 @@ function Comments(props) {
             {console.log(props.CommentLists)}
 
             {props.CommentLists && props.CommentLists.map((comment, index) => (
-                
+                (!comment.responseTo &&
                     <React.Fragment>
                         <SingleComment comment={comment} postId={props.postId} refreshFunction={props.refreshFunction} />
                     </React.Fragment>
+                )
                 
             ))}
 

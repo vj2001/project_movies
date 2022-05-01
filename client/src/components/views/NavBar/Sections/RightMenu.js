@@ -1,25 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Menu } from 'antd';
 import axios from 'axios';
 import { USER_SERVER } from '../../../Config';
-import { withRouter } from 'react-router-dom';
+import { withRouter,RouteProps,Route } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
 
 function RightMenu(props) {
+  
+  
+ 
   const user = useSelector(state => state.user)
   // console.log(user)
   // let name = User.find({'_id':localStorage.getItem('userId')})
   // console.log(name)
-  const logoutHandler = () => {
-    axios.get(`${USER_SERVER}/logout`).then(response => {
-      if (response.status === 200) {
-        props.history.push("/login");
-      } else {
-        alert('Log Out Failed')
-      }
-    });
-  };
+  
+   
+
+
+    const logoutHandler = () => {
+      
+       axios.get(`${USER_SERVER}/logout`).then(response => {
+        if (response.status === 200) {
+           props.history.push("/login");
+         
+        } else {
+          alert('Log Out Failed')
+        }
+      });
+      
+  }
+
+  
   
   if (user.userData && !user.userData.isAuth) {
     
