@@ -22,7 +22,7 @@ function RightMenu(props) {
       
        axios.get(`${USER_SERVER}/logout`).then(response => {
         if (response.status === 200) {
-           //props.history.push("/login");
+          //  props.history.push("/login");
            localStorage.removeItem('userId');
            window.location.reload();
             //props.history.push("/login");
@@ -63,5 +63,5 @@ function RightMenu(props) {
   }
 }
 
-export default withRouter(RightMenu);
+export default RightMenu;
 

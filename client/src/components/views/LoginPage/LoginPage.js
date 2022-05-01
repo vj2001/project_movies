@@ -57,6 +57,7 @@ function LoginPage(props) {
       }}
     >
       {props => {
+        console.log(props)
         const {
           values,
           touched,
@@ -130,6 +131,6 @@ function LoginPage(props) {
   );
 };
 
-export default withRouter(LoginPage);
+export default LoginPage;
 
 

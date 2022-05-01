@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col } from 'antd';
-
+import {Link} from "react-router-dom"
 
 function GridCards(props) {
 
@@ -8,9 +8,9 @@ function GridCards(props) {
         return (
             <Col lg={6} md={8} xs={24}>
                 <div style={{ position: 'relative' }}>
-                    <a href={`/movie/${props.movieId}`} >
+                    <Link to={`/movie/${props.movieId}`} >
                         <img style={{ width: '100%', height: '320px' }} src={props.image} alt={props.movieName} />
-                    </a>
+                    </Link>
                 </div>
             </Col>
         )
