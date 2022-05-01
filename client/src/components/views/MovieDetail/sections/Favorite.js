@@ -51,6 +51,11 @@ function Favorite(props) {
 
     const onClickFavorite = () => {
 
+        if(!localStorage.getItem('userId')){
+            alert('Please Login First');
+            return ;
+        }
+
         if (Favorited) {
             Axios.post('/api/favorite/removeFromFavorite', variables)
                 .then(response => {
