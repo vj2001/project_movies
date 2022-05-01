@@ -7,7 +7,7 @@ mongoURI:"mongodb+srv://username:<password>@cluster0.ed73q.mongodb.net/movies?re
 ```
 npm start
 ```
-3. Run the command to start client on port 3000
+3. Run the command to start react app on port 3000
 ```
 cd client
 npm start
