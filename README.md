@@ -4,7 +4,7 @@ Dockerhub Link: https://hub.docker.com/r/vj100/react-app**
 
 # Steps to run the app 
 
-1. Add mongodb url (localhost / atlas) in dev.js
+1. Add mongodb url (localhost / atlas) in config/dev.js
 ```
 mongoURI:"mongodb://localhost:27017/movies"
 mongoURI:"mongodb+srv://username:<password>@cluster0.ed73q.mongodb.net/movies?retryWrites=true&w=majority"
