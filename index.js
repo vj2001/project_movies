@@ -31,6 +31,12 @@ app.use('/api/users', require('./routes/users'));
 app.use('/api/favorite', require('./routes/favorite'));
 app.use('/api/comment', require('./routes/comment'))
 
+
+if(process.env.NODE_ENV == "production")
+{
+ app.use(express.static("client/build"));
+}
+
 const port = process.env.PORT || 5000
 
 app.listen(port, () => {
