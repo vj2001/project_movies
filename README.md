@@ -1,3 +1,9 @@
+**Project Website Link:  https://innogeeks-movies.herokuapp.com/ <br/>
+Github Link: https://github.com/vj2001/project_movies  <br/>
+Dockerhub Link: https://hub.docker.com/r/vj100/react-app**
+
+# Steps to run the app 
+
 1. Add mongodb url (localhost / atlas) in dev.js
 ```
 mongoURI:"mongodb://localhost:27017/movies"
@@ -12,7 +18,3 @@ npm start
 cd client
 npm start
 ```
-
-Project Website Link:  https://innogeeks-movies.herokuapp.com/
-Github Link: https://github.com/vj2001/project_movies
-Dockerhub Link: https://hub.docker.com/r/vj100/react-app
